@@ -1,0 +1,158 @@
+{
+    "count": 884905,
+    "next": "https://api.rawg.io/api/games?key=9ddac8e309f447edbe487fdba9804537&page=2&page_size=1",
+    "previous": null,
+    "results": [
+        {
+            "id": 3498,
+            "slug": "grand-theft-auto-v",
+            "name": "Grand Theft Auto V",
+            "released": "2013-09-17",
+            "tba": false,
+            "background_image": "https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg",
+            "rating": 4.47,
+            "rating_top": 5,
+            "ratings": [
+                {
+                    "id": 5,
+                    "title": "exceptional",
+                    "count": 3722,
+                    "percent": 59.05
+                }
+            ],
+            "ratings_count": 6218,
+            "reviews_text_count": 47,
+            "added": 19041,
+            "added_by_status": {
+                "yet": 494,
+                "owned": 11025,
+                "beaten": 5304,
+                "toplay": 555,
+                "dropped": 986,
+                "playing": 677
+            },
+            "metacritic": 92,
+            "playtime": 73,
+            "suggestions_count": 412,
+            "updated": "2023-03-15T12:59:20",
+            "user_game": null,
+            "reviews_count": 6303,
+            "saturated_color": "0f0f0f",
+            "dominant_color": "0f0f0f",
+            "platforms": [
+                {
+                    "platform": {
+                        "id": 187,
+                        "name": "PlayStation 5",
+                        "slug": "playstation5",
+                        "image": null,
+                        "year_end": null,
+                        "year_start": 2020,
+                        "games_count": 819,
+                        "image_background": "https://media.rawg.io/media/games/d89/d89bd0cf4fcdc10820892980cbba0f49.jpg"
+                    },
+                    "released_at": "2013-09-17",
+                    "requirements_en": null,
+                    "requirements_ru": null
+                }
+            ],
+            "parent_platforms": [
+                {
+                    "platform": {
+                        "id": 1,
+                        "name": "PC",
+                        "slug": "pc"
+                    }
+                }
+            ],
+            "genres": [
+                {
+                    "id": 4,
+                    "name": "Action",
+                    "slug": "action",
+                    "games_count": 177258,
+                    "image_background": "https://media.rawg.io/media/games/26d/26d4437715bee60138dab4a7c8c59c92.jpg"
+                },
+                {
+                    "id": 290378,
+                    "store": {
+                        "id": 2,
+                        "name": "Xbox Store",
+                        "slug": "xbox-store",
+                        "domain": "microsoft.com",
+                        "games_count": 4756,
+                        "image_background": "https://media.rawg.io/media/games/c4b/c4b0cab189e73432de3a250d8cf1c84e.jpg"
+                    }
+                }
+            ],
+            "clip": null,
+            "tags": [
+                {
+                    "id": 31,
+                    "name": "Singleplayer",
+                    "slug": "singleplayer",
+                    "language": "eng",
+                    "games_count": 208470,
+                    "image_background": "https://media.rawg.io/media/games/8d6/8d69eb6c32ed6acfd75f82d532144993.jpg"
+                },
+                {
+                    "id": 62349,
+                    "name": "vr mod",
+                    "slug": "vr-mod",
+                    "language": "eng",
+                    "games_count": 17,
+                    "image_background": "https://media.rawg.io/media/screenshots/1bb/1bb3f78f0fe43b5d5ca2f3da5b638840.jpg"
+                }
+            ],
+            "esrb_rating": {
+                "id": 4,
+                "name": "Mature",
+                "slug": "mature"
+            },
+            "short_screenshots": [
+                {
+                    "id": -1,
+                    "image": "https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg"
+                },
+                {
+                    "id": 1827227,
+                    "image": "https://media.rawg.io/media/screenshots/592/592e2501d8734b802b2a34fee2df59fa.jpg"
+                }
+            ]
+        }
+    ],
+    "seo_title": "All Games",
+    "seo_description": "",
+    "seo_keywords": "",
+    "seo_h1": "All Games",
+    "noindex": false,
+    "nofollow": false,
+    "description": "",
+    "filters": {
+        "years": [
+            {
+                "from": 2020,
+                "to": 2023,
+                "filter": "2020-01-01,2023-12-31",
+                "decade": 2020,
+                "years": [
+                    {
+                        "year": 2023,
+                        "count": 36609,
+                        "nofollow": false
+                    },
+                    {
+                        "year": 2020,
+                        "count": 133047,
+                        "nofollow": false
+                    }
+                ],
+                "nofollow": true,
+                "count": 520825
+            }
+        ]
+    },
+    "nofollow_collections": [
+        "stores"
+    ]
+}

@@ -1,0 +1,143 @@
+{
+    "count": 884890,
+    "next": "https://api.rawg.io/api/games?key=9ddac8e309f447edbe487fdba9804537&page=3&page_size=1",
+    "previous": "https://api.rawg.io/api/games?key=9ddac8e309f447edbe487fdba9804537&page_size=1",
+    "results": [
+        {
+            "id": 3328,
+            "slug": "the-witcher-3-wild-hunt",
+            "name": "The Witcher 3: Wild Hunt",
+            "released": "2015-05-18",
+            "tba": false,
+            "background_image": "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg",
+            "rating": 4.66,
+            "rating_top": 5,
+            "ratings": [
+                {
+                    "id": 5,
+                    "title": "exceptional",
+                    "count": 4643,
+                    "percent": 77.6
+                }
+            ],
+            "ratings_count": 5897,
+            "reviews_text_count": 59,
+            "added": 18183,
+            "added_by_status": {
+                "yet": 1036,
+                "owned": 10475,
+                "beaten": 4300,
+                "toplay": 716,
+                "dropped": 819,
+                "playing": 837
+            },
+            "metacritic": 92,
+            "playtime": 46,
+            "suggestions_count": 647,
+            "updated": "2023-03-16T08:39:49",
+            "user_game": null,
+            "reviews_count": 5983,
+            "saturated_color": "0f0f0f",
+            "dominant_color": "0f0f0f",
+            "platforms": [
+                {
+                    "platform": {
+                        "id": 186,
+                        "name": "Xbox Series S/X",
+                        "slug": "xbox-series-x",
+                        "image": null,
+                        "year_end": null,
+                        "year_start": 2020,
+                        "games_count": 731,
+                        "image_background": "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+                    },
+                    "released_at": "2015-05-18",
+                    "requirements_en": null,
+                    "requirements_ru": null
+                }
+            ],
+            "parent_platforms": [
+                {
+                    "platform": {
+                        "id": 1,
+                        "name": "PC",
+                        "slug": "pc"
+                    }
+                }
+            ],
+            "genres": [
+                {
+                    "id": 4,
+                    "name": "Action",
+                    "slug": "action",
+                    "games_count": 177875,
+                    "image_background": "https://media.rawg.io/media/games/b8c/b8c243eaa0fbac8115e0cdccac3f91dc.jpg"
+                }
+            ],
+            "stores": [
+                {
+                    "id": 354780,
+                    "store": {
+                        "id": 5,
+                        "name": "GOG",
+                        "slug": "gog",
+                        "domain": "gog.com",
+                        "games_count": 4934,
+                        "image_background": "https://media.rawg.io/media/games/4cf/4cfc6b7f1850590a4634b08bfab308ab.jpg"
+                    }
+                }
+            ],
+            "clip": null,
+            "tags": [
+                {
+                    "id": 31,
+                    "name": "Singleplayer",
+                    "slug": "singleplayer",
+                    "language": "eng",
+                    "games_count": 209582,
+                    "image_background": "https://media.rawg.io/media/games/73e/73eecb8909e0c39fb246f457b5d6cbbe.jpg"
+                }
+            ],
+            "esrb_rating": {
+                "id": 4,
+                "name": "Mature",
+                "slug": "mature"
+            },
+            "short_screenshots": [
+                {
+                    "id": -1,
+                    "image": "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+                }
+            ]
+        }
+    ],
+    "seo_title": "All Games",
+    "seo_description": "",
+    "seo_keywords": "",
+    "seo_h1": "All Games",
+    "noindex": false,
+    "nofollow": false,
+    "description": "",
+    "filters": {
+        "years": [
+            {
+                "from": 2020,
+                "to": 2023,
+                "filter": "2020-01-01,2023-12-31",
+                "decade": 2020,
+                "years": [
+                    {
+                        "year": 2023,
+                        "count": 36610,
+                        "nofollow": false
+                    }
+                ],
+                "nofollow": true,
+                "count": 520824
+            }
+        ]
+    },
+    "nofollow_collections": [
+        "stores"
+    ]
+}

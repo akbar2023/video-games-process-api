@@ -1,0 +1,8 @@
+%dw 2.0
+
+type auto_6edfbdfe_12e7_4e5c_beee_d49f29f735ea_Input_Payload = Array<{|  name: String,   released: String,   platforms: Array<"xbox one" | "playstation">, 
+  genres: Array<"Racing" | "Adventure">, 
+  stores: Array<"playstation store" | "xbox store">, 
+  rating: Number
+|}>
+
