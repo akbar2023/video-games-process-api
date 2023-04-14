@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Anastacia",
+    "released": "laudantium,",
+    "platforms": [
+      "xbox one",
+      "xbox one"
+    ],
+    "genres": [
+      "Racing",
+      "Adventure"
+    ],
+    "stores": [
+      "xbox store",
+      "xbox store"
+    ],
+    "rating": 43
+  },
+  {
+    "name": "Allyson",
+    "released": "et",
+    "platforms": [
+      "playstation",
+      "playstation"
+    ],
+    "genres": [
+      "Adventure",
+      "Racing"
+    ],
+    "stores": [
+      "playstation store",
+      "xbox store"
+    ],
+    "rating": 30
+  }
+]

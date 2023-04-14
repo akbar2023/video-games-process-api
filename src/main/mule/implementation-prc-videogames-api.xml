@@ -11,15 +11,15 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<http:request-config name="HTTP_Request_configuration_MongoDB" doc:name="HTTP Request configuration" doc:id="76b4a853-fd11-4d8e-ac71-7738b3a5b7de" >
 		<http:request-connection host="localhost" port="8082" />
 	</http:request-config>
-	<flow name="get-data-from-rawg-system-api-Flow" doc:id="6edfbdfe-12e7-4e5c-beee-d49f29f735ea" >
+	<flow name="post-games-to-mongodb-sys-api-Flow" doc:id="6edfbdfe-12e7-4e5c-beee-d49f29f735ea" >
 		<http:request method="GET" doc:name="Request rawg system api" doc:id="9c46b43d-2afa-4065-bd91-5ac7db12c077" config-ref="HTTP_Request_configuration" path="/api/games">
-			<http:query-params ><![CDATA[#[output application/json
+			<http:query-params><![CDATA[#[output application/java
 ---
 {
-	"key" : attributes.queryParams.key
+	"key" : "9ddac8e309f447edbe487fdba9804537"
 }]]]></http:query-params>
 		</http:request>
-		<ee:transform doc:name="Transform Message" doc:id="2c61f7e5-7621-4055-b9b3-e9faebbbb24a" >
+		<ee:transform doc:name="Filter games data" doc:id="2c61f7e5-7621-4055-b9b3-e9faebbbb24a" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
@@ -30,34 +30,39 @@ payload.results map ( result , indexOfResult ) -> {
 	name: result.name,
 	rating: result.rating,
 	released: result.released,
-	platforms: result.platforms.platform.name
+	platforms: result.platforms.platform.name,
+	top_rating: result.ratings maxBy ((item) -> item.count)
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<http:request method="POST" doc:name="insert to mongodb system api" doc:id="ccf9465c-cec8-4e27-9d8d-cb9ada8c0e95" config-ref="HTTP_Request_configuration_MongoDB" path="/api/post-games"/>
-		<ee:transform doc:name="Transform Message" doc:id="480f2c6f-18e3-4af6-9d3f-a5cd5bdf1ec1" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
----
-payload]]></ee:set-payload>
-			</ee:message>
-		</ee:transform>
-	</flow>
-	<flow name="search-games-by-filters-from-mongo-db" doc:id="397e94fa-76b6-4388-97b0-4ea042927ae6" >
-		<ee:transform doc:name="Transform Message" doc:id="4121f17e-c0ae-4087-9a00-abd2fd4d043a" >
+		<foreach doc:name="For Each" doc:id="324fcc46-ba02-40b8-bc0c-d6169b64169c" >
+			<http:request method="POST" doc:name="post 1 by 1 to system api" doc:id="ccf9465c-cec8-4e27-9d8d-cb9ada8c0e95" config-ref="HTTP_Request_configuration_MongoDB" path="/api/games" />
+		</foreach>
+		<ee:transform doc:name="Succes message" doc:id="480f2c6f-18e3-4af6-9d3f-a5cd5bdf1ec1" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
 {
-	"released": attributes.queryParams.dates default "",
-	"platforms": attributes.queryParams.platforms default "",
-	"genres": attributes.queryParams.genres default "",
-	"stores": attributes.queryParams.stores default ""	
+	(message: "Success!") if(attributes.statusCode==201)
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<http:request method="GET" doc:name="Mongo DB System Api" doc:id="6117e661-641f-4c69-8f58-5bb4d4d9aa98" config-ref="HTTP_Request_configuration_MongoDB" path="/api/search-games"/>
+	</flow>
+	<flow name="get-games-from-mongodb-flow" doc:id="397e94fa-76b6-4388-97b0-4ea042927ae6" >
+		<logger level="INFO" doc:name="Query Params" doc:id="37497d08-d0e5-4ab8-98e7-f71fe1f1212e" message="Query Params"/>
+		<logger level="INFO" doc:name="Query Params details" doc:id="faa5c54a-d98c-4119-b8b6-8280a87f99d9" message="#[attributes.queryParams]"/>
+		<http:request method="GET" doc:name="GET Games from MongoDB" doc:id="53c1f7ee-9633-4e86-890b-9922d91753f6" config-ref="HTTP_Request_configuration_MongoDB" path="/api/games">
+			<http:query-params ><![CDATA[#[output application/json
+var qp = attributes.queryParams
+---
+{
+	(released: qp.released) if(qp.released?),
+	(genres: qp.genres) if(qp.genres?),
+	(stores: qp.stores) if(qp.stores?),
+	(platforms: qp.platforms) if(qp.platforms?),
+	(rating: qp.rating) if(qp.rating?)
+}]]]></http:query-params>
+		</http:request>
 	</flow>
 </mule>

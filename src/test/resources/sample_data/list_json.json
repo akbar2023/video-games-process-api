@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Alfredia",
+    "released": "voluptas",
+    "platforms": [
+      "xbox one",
+      "xbox one"
+    ],
+    "genres": [
+      "Racing",
+      "Racing"
+    ],
+    "stores": [
+      "playstation store",
+      "playstation store"
+    ],
+    "rating": 81
+  },
+  {
+    "name": "Alane",
+    "released": "est,",
+    "platforms": [
+      "xbox one",
+      "playstation"
+    ],
+    "genres": [
+      "Racing",
+      "Racing"
+    ],
+    "stores": [
+      "xbox store",
+      "xbox store"
+    ],
+    "rating": 50
+  }
+]

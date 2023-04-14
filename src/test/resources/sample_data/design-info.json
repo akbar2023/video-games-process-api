@@ -2,6 +2,14 @@
   "sampleData": {
     "2c61f7e5-7621-4055-b9b3-e9faebbbb24a": {
       "payload": "sample_data/json.json"
-    }
+    },
+    "6117e661-641f-4c69-8f58-5bb4d4d9aa98": {
+      "payload": "sample_data/list_json.json"
+    },
+    "53c1f7ee-9633-4e86-890b-9922d91753f6": {
+      "payload": "sample_data/list_json_1.json"
+    },
+    "1cfcba31-2602-4f2f-b263-2abf58408a93": {},
+    "480f2c6f-18e3-4af6-9d3f-a5cd5bdf1ec1": {}
   }
 }
