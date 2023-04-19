@@ -6,63 +6,88 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="9e783217-7a5c-491e-8769-b87181d571bb" >
-		<http:request-connection host="localhost" port="8081" />
+		<http:request-connection host="localhost" port="8081" connectionIdleTimeout="500000"/>
 	</http:request-config>
 	<http:request-config name="HTTP_Request_configuration_MongoDB" doc:name="HTTP Request configuration" doc:id="76b4a853-fd11-4d8e-ac71-7738b3a5b7de" >
-		<http:request-connection host="localhost" port="8082" />
+		<http:request-connection host="localhost" port="8082" connectionIdleTimeout="500000"/>
 	</http:request-config>
 	<flow name="post-games-to-mongodb-sys-api-Flow" doc:id="6edfbdfe-12e7-4e5c-beee-d49f29f735ea" >
-		<http:request method="GET" doc:name="Request rawg system api" doc:id="9c46b43d-2afa-4065-bd91-5ac7db12c077" config-ref="HTTP_Request_configuration" path="/api/games">
-			<http:query-params><![CDATA[#[output application/java
+		<set-variable value="#[attributes.queryParams.fromPage]" doc:name="var fromPage" doc:id="920eca88-4693-4822-9db7-6e463e4e81a4" variableName="fromPage" />
+		<set-variable value="#[attributes.queryParams.toPage]" doc:name="var toPage" doc:id="d1fcc2e8-3357-4264-a7b2-80ed452264f5" variableName="toPage"/>
+		<set-payload value="#[(vars.fromPage as Number to vars.toPage as Number) as Array]" doc:name="define range of pages" doc:id="653cfb04-a432-45e1-8145-3b1e0b7a9707" />
+		<foreach doc:name="For Each" doc:id="2b208c81-9d78-4fb5-bca0-b03eef94732f" >
+			<logger level="INFO" doc:name="page idx fetched from rawg" doc:id="c2862d03-5457-4d7a-9e25-7a249d3617fe" message='#[payload]'/>
+			<http:request method="GET" doc:name="Request rawg system api" doc:id="9c46b43d-2afa-4065-bd91-5ac7db12c077" config-ref="HTTP_Request_configuration" path="/api/games">
+			<http:query-params><![CDATA[#[output application/json
 ---
 {
-	"key" : "9ddac8e309f447edbe487fdba9804537"
+	"page": payload
 }]]]></http:query-params>
 		</http:request>
-		<ee:transform doc:name="Filter games data" doc:id="2c61f7e5-7621-4055-b9b3-e9faebbbb24a" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
+			<ee:transform doc:name="array of games" doc:id="2c61f7e5-7621-4055-b9b3-e9faebbbb24a">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-payload.results map ( result , indexOfResult ) -> {
-	genres: result.genres.name,
-	stores: result.stores.store.name,
-	name: result.name,
-	rating: result.rating,
-	released: result.released,
-	platforms: result.platforms.platform.name,
-	top_rating: result.ratings maxBy ((item) -> item.count)
-}]]></ee:set-payload>
+payload.results]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<foreach doc:name="For Each" doc:id="324fcc46-ba02-40b8-bc0c-d6169b64169c" >
+			<foreach doc:name="For Each" doc:id="324fcc46-ba02-40b8-bc0c-d6169b64169c">
 			<http:request method="POST" doc:name="post 1 by 1 to system api" doc:id="ccf9465c-cec8-4e27-9d8d-cb9ada8c0e95" config-ref="HTTP_Request_configuration_MongoDB" path="/api/games" />
 		</foreach>
-		<ee:transform doc:name="Succes message" doc:id="480f2c6f-18e3-4af6-9d3f-a5cd5bdf1ec1" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
+			<logger level="INFO" doc:name='Log ""UN TOUR DE RAWG""' doc:id="70409be6-6226-41de-924e-a8932af3ca8d" message='#["UN TOUR DE RAWG"]'/>
+		</foreach>
+		<ee:transform doc:name="indicates array of pages fetched from rawg" doc:id="480f2c6f-18e3-4af6-9d3f-a5cd5bdf1ec1">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-{
-	(message: "Success!") if(attributes.statusCode==201)
-}]]></ee:set-payload>
+payload
+]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</flow>
 	<flow name="get-games-from-mongodb-flow" doc:id="397e94fa-76b6-4388-97b0-4ea042927ae6" >
 		<logger level="INFO" doc:name="Query Params" doc:id="37497d08-d0e5-4ab8-98e7-f71fe1f1212e" message="Query Params"/>
 		<logger level="INFO" doc:name="Query Params details" doc:id="faa5c54a-d98c-4119-b8b6-8280a87f99d9" message="#[attributes.queryParams]"/>
+		<set-variable value="#[attributes.queryParams]" doc:name="var qp ( Query Params)" doc:id="af8ae680-3090-432d-87f6-8a088598a70c" variableName="qp"/>
 		<http:request method="GET" doc:name="GET Games from MongoDB" doc:id="53c1f7ee-9633-4e86-890b-9922d91753f6" config-ref="HTTP_Request_configuration_MongoDB" path="/api/games">
 			<http:query-params ><![CDATA[#[output application/json
-var qp = attributes.queryParams
+var query = attributes.queryParams
 ---
 {
-	(released: qp.released) if(qp.released?),
-	(genres: qp.genres) if(qp.genres?),
-	(stores: qp.stores) if(qp.stores?),
-	(platforms: qp.platforms) if(qp.platforms?),
-	(rating: qp.rating) if(qp.rating?)
+	(released: query.released) if(query.released?),
+	(genres: query.genres) if(query.genres?),
+	(stores: query.stores) if(query.stores?),
+	(platforms: query.platforms) if(query.platforms?),
+	(rating: "BEST") if(query.rating?)
 }]]]></http:query-params>
 		</http:request>
+		<choice doc:name="Choice" doc:id="e9784bb3-5fa8-4e4c-a60f-5461f03a2d7a" >
+			<when expression='#[vars.qp.rating?]'>
+				<ee:transform doc:name="filter best and worst games" doc:id="e863a2f6-e840-4bb4-b9df-beb6801c4210">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+
+payload filter ((item, index) -> item.rating > 4.5 or item.rating < 2)
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+				<logger level="INFO" doc:name='Log "RATING FILTER"' doc:id="7f00b69c-de4d-4b79-b143-1db89c4ae146" message="RATING FILTER"/>
+			</when>
+			<otherwise >
+				<ee:transform doc:name="without filter" doc:id="9f00a217-16f3-40ab-9c84-0e4d04abd58b" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<logger level="INFO" doc:name='Log "NO RATING"' doc:id="c942dbda-cdc8-4ba3-86ce-6336065b00a7" message="NO RATING"/>
+			</otherwise>
+		</choice>
 	</flow>
 </mule>
