@@ -42,7 +42,10 @@ payload.results]]></ee:set-payload>
 				<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-payload
+{
+	"message": "Pages from " ++ vars.fromPage ++ " to page " ++ vars.toPage ++ " were inserted"
+}
+
 ]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
