@@ -52,13 +52,6 @@
 			<version>1.6.1</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
-		<dependency>
-			<groupId>fa7b5668-0756-43d7-95ee-1d9008bd8616</groupId>
-			<artifactId>prc-videogames-api</artifactId>
-			<version>1.0.3</version>
-			<classifier>raml</classifier>
-			<type>zip</type>
-		</dependency>
 	</dependencies>
 
 	<repositories>

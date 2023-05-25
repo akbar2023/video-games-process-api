@@ -5,7 +5,7 @@
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="9e783217-7a5c-491e-8769-b87181d571bb" >
+	<http:request-config name="HTTP_Request_configuration_Rawg" doc:name="HTTP Request configuration" doc:id="9e783217-7a5c-491e-8769-b87181d571bb" >
 		<http:request-connection host="localhost" port="8081" connectionIdleTimeout="500000"/>
 	</http:request-config>
 	<http:request-config name="HTTP_Request_configuration_MongoDB" doc:name="HTTP Request configuration" doc:id="76b4a853-fd11-4d8e-ac71-7738b3a5b7de" >
@@ -17,7 +17,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<set-payload value="#[(vars.fromPage as Number to vars.toPage as Number) as Array]" doc:name="define range of pages" doc:id="653cfb04-a432-45e1-8145-3b1e0b7a9707" />
 		<foreach doc:name="For Each" doc:id="2b208c81-9d78-4fb5-bca0-b03eef94732f" >
 			<logger level="INFO" doc:name="page idx fetched from rawg" doc:id="c2862d03-5457-4d7a-9e25-7a249d3617fe" message='#[payload]'/>
-			<http:request method="GET" doc:name="Request rawg system api" doc:id="9c46b43d-2afa-4065-bd91-5ac7db12c077" config-ref="HTTP_Request_configuration" path="/api/games">
+			<http:request method="GET" doc:name="Request rawg system api" doc:id="9c46b43d-2afa-4065-bd91-5ac7db12c077" config-ref="HTTP_Request_configuration_Rawg" path="/api/games">
 			<http:query-params><![CDATA[#[output application/json
 ---
 {

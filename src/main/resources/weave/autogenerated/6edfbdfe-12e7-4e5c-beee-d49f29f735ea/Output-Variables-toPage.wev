@@ -1,0 +1,4 @@
+%dw 2.0
+
+type auto_6edfbdfe_12e7_4e5c_beee_d49f29f735ea_Output_Variables_toPage = Any
+
