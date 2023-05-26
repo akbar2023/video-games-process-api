@@ -6,11 +6,12 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<http:request-config name="HTTP_Request_configuration_Rawg" doc:name="HTTP Request configuration" doc:id="9e783217-7a5c-491e-8769-b87181d571bb" >
-		<http:request-connection host="localhost" port="8081" connectionIdleTimeout="500000"/>
+		<http:request-connection host="sys-rawg-api.us-e2.cloudhub.io" connectionIdleTimeout="500000"/>
 	</http:request-config>
 	<http:request-config name="HTTP_Request_configuration_MongoDB" doc:name="HTTP Request configuration" doc:id="76b4a853-fd11-4d8e-ac71-7738b3a5b7de" >
-		<http:request-connection host="localhost" port="8082" connectionIdleTimeout="500000"/>
+		<http:request-connection host="sys-mongodb-api.us-e2.cloudhub.io" connectionIdleTimeout="500000"/>
 	</http:request-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="56cf2090-33fc-42f3-98ff-00321b01318e" file="config.yaml" />
 	<flow name="post-games-to-mongodb-sys-api-Flow" doc:id="6edfbdfe-12e7-4e5c-beee-d49f29f735ea" >
 		<set-variable value="#[attributes.queryParams.fromPage]" doc:name="var fromPage" doc:id="920eca88-4693-4822-9db7-6e463e4e81a4" variableName="fromPage" />
 		<set-variable value="#[attributes.queryParams.toPage]" doc:name="var toPage" doc:id="d1fcc2e8-3357-4264-a7b2-80ed452264f5" variableName="toPage"/>
